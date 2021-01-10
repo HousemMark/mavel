@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.7.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.skyline</groupId>
+    <artifactId>api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>api-core</module>
+        <module>api-web</module>
+        <module>api-biz</module>
+        <module>api-common</module>
+    </modules>
+
+    <properties>
+        <shield.version>1.0-SNAPSHOT</shield.version>
+        <springcloud.version>1.4.7.RELEASE</springcloud.version>
+        <zuul.version>1.3.0</zuul.version>
+        <fastjson.version>1.2.37</fastjson.version>
+        <common-io.version>2.6</common-io.version>
+        <lombok.version>1.18.12</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>shield-common</artifactId>
+                <version>${shield.version}</version>
+            </dependency>
+            <!-- 本项目下所有子项目依赖 -->
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>api-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>api-biz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>api-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>api-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- SpringCloud依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                <version>${springcloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-zuul</artifactId>
+                <version>${springcloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-feign</artifactId>
+                <version>${springcloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.netflix.zuul</groupId>
+                <artifactId>zuul-core</artifactId>
+                <version>${zuul.version}</version>
+            </dependency>
+            <!-- 工具依赖 -->
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${common-io.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-biz" />
+        <module name="api-common" />
+        <module name="api-core" />
+        <module name="api-web" />
+        <module name="professor" />
+        <module name="shield-common" />
+        <module name="shield-mq" />
+        <module name="shield-redis" />
+        <module name="shield-snowflake" />
+        <module name="shield-swagger" />
+        <module name="shield-zk-client" />
+        <module name="shield-zk-confcenter" />
+        <module name="spider" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="client" target="1.8" />
+      <module name="controller" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="client" options="" />
+      <module name="professor" options="" />
+      <module name="spider" options="" />
+    </option>
+  </component>
+</project>
