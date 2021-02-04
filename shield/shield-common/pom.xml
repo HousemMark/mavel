@@ -11,5 +11,10 @@
 
     <artifactId>shield-common</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+        </dependency>
+    </dependencies>
 </project>

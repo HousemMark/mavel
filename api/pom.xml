@@ -40,6 +40,16 @@
                 <artifactId>shield-common</artifactId>
                 <version>${shield.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>shield-zk-confcenter</artifactId>
+                <version>${shield.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>shield-redis</artifactId>
+                <version>${shield.version}</version>
+            </dependency>
             <!-- 本项目下所有子项目依赖 -->
             <dependency>
                 <groupId>com.skyline</groupId>

@@ -49,6 +49,14 @@
             <groupId>com.skyline</groupId>
             <artifactId>shield-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.skyline</groupId>
+            <artifactId>shield-zk-confcenter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.skyline</groupId>
+            <artifactId>shield-redis</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
