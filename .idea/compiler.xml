@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -10,6 +11,8 @@
         <module name="api-common" />
         <module name="api-core" />
         <module name="api-web" />
+        <module name="gateway" />
+        <module name="merchant-web" />
         <module name="professor" />
         <module name="shield-common" />
         <module name="shield-mq" />
@@ -18,19 +21,23 @@
         <module name="shield-swagger" />
         <module name="shield-zk-client" />
         <module name="shield-zk-confcenter" />
-        <module name="spider" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="client" target="1.8" />
       <module name="controller" target="1.8" />
+      <module name="gateway-web" target="1.8" />
+      <module name="spider" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="client" options="" />
-      <module name="professor" options="" />
-      <module name="spider" options="" />
+      <module name="gateway" options="-parameters" />
+      <module name="gateway-web" options="-parameters" />
+      <module name="merchant-web" options="-parameters" />
+      <module name="professor" options="-parameters" />
+      <module name="spider" options="-parameters" />
     </option>
   </component>
 </project>
