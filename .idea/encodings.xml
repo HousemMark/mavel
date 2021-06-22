@@ -8,8 +8,9 @@
     <file url="file://$PROJECT_DIR$/api/api-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api/api-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/gateway" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/gateway" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/merchant" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/merchant/merchant-biz" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/merchant/merchant-dal" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/merchant/merchant-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/professor" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/shield" charset="UTF-8" />

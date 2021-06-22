@@ -12,6 +12,8 @@
         <module name="api-core" />
         <module name="api-web" />
         <module name="gateway" />
+        <module name="merchant-biz" />
+        <module name="merchant-dal" />
         <module name="merchant-web" />
         <module name="professor" />
         <module name="shield-common" />
@@ -35,6 +37,8 @@
       <module name="client" options="" />
       <module name="gateway" options="-parameters" />
       <module name="gateway-web" options="-parameters" />
+      <module name="merchant-biz" options="-parameters" />
+      <module name="merchant-dal" options="-parameters" />
       <module name="merchant-web" options="-parameters" />
       <module name="professor" options="-parameters" />
       <module name="spider" options="-parameters" />

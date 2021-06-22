@@ -1,8 +1,14 @@
 package com.skyline.shield.common.exception;
 
+import com.skyline.shield.common.bean.IReturnCode;
+
 public class ServiceException extends BaseException {
 
     private int code;
+
+    public ServiceException(IReturnCode returnCode) {
+
+    }
 
     @Override
     public int getCode() {

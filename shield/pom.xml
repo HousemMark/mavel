@@ -35,10 +35,16 @@
         <jackson-databind.version>2.11.3</jackson-databind.version>
         <commons-lang3.version>3.6</commons-lang3.version>
         <transmittable-thread-local.version>2.11.0</transmittable-thread-local.version>
+        <spring-beans.version>5.2.3.RELEASE</spring-beans.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring-beans.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.skyline</groupId>
                 <artifactId>shield-common</artifactId>

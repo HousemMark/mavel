@@ -18,6 +18,8 @@
 
     <modules>
         <module>merchant-web</module>
+        <module>merchant-dal</module>
+        <module>merchant-biz</module>
     </modules>
 
     <properties>
@@ -26,10 +28,83 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
+        <hutool.version>5.6.0</hutool.version>
+        <ibaties.version>3.0</ibaties.version>
+        <lombok.verwsion>1.16.18</lombok.verwsion>
+        <shield.version>1.0-SNAPSHOT</shield.version>
+        <!--<security.version>2.2.0.RELEASE</security.version>-->
+        <!--<spring-security-jwt.version>1.0.9.RELEASE</spring-security-jwt.version>-->
+        <mybatis-starter.version>2.2.4.RELEASE</mybatis-starter.version>
+        <mysql-connector.version>8.0.25</mysql-connector.version>
+        <druid.version>1.1.0</druid.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- mysql依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--添加mybatis整合springboot-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+            <!--连接MySQL驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.cloud</groupId>-->
+                <!--<artifactId>spring-cloud-starter-security</artifactId>-->
+                <!--<version>${security.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.security</groupId>-->
+                <!--<artifactId>spring-security-jwt</artifactId>-->
+                <!--<version>${spring-security-jwt.version}</version>-->
+            <!--</dependency>-->
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>merchant-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>merchant-biz</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>merchant-dal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skyline</groupId>
+                <artifactId>shield-common</artifactId>
+                <version>${shield.version}</version>
+            </dependency>
+            <!-- lombok dependency -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.verwsion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.ibatis</groupId>
+                <artifactId>ibatis-core</artifactId>
+                <version>${ibaties.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -39,4 +114,32 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>1.3.5</version>
+                    <configuration>
+                        <configurationFile>${basedir}/src/main/resources/mybatis-generator/generatorConfig.xml
+                        </configurationFile>
+                        <overwrite>true</overwrite>
+                        <verbose>true</verbose>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
 </project>

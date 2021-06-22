@@ -11,6 +11,7 @@ public class UserController {
 
     @PostMapping("/echo")
     public String echo(@RequestParam("var") String var){
+
         return var;
     }
 }
