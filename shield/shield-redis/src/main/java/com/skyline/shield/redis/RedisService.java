@@ -17,8 +17,8 @@ import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 /**
  * Redis服务
  *
- * @author zhangrong
- * @version Id: RedisService.java, v 0.1 2018/11/18 15:31 zhangrong Exp $$
+ * @author mark
+ * @version Id: RedisService.java, v 0.1 2018/11/18 15:31 mark Exp $$
  */
 @Component
 public class RedisService implements Cache {

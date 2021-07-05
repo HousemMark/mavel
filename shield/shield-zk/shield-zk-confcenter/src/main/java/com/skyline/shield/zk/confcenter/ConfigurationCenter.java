@@ -6,7 +6,7 @@ import com.skyline.shield.zk.zkclient.ZkClient;
 /**
  * 配置中心API
  *
- * @author zhangrong
+ * @author mark
  * @version $Id: ConfigurationCenter.java, v 1.0 Feb 21, 2017 8:05:48 PM sunjm13534 Exp $
  */
 public interface ConfigurationCenter {
