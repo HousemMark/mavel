@@ -1,22 +1,26 @@
 package com.skyline.merchant.biz.impl;
 
 import cn.hutool.core.lang.Snowflake;
-import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.skyline.merchant.biz.MerchantLoginService;
 import com.skyline.merchant.bo.CreateAccountBo;
+import com.skyline.merchant.bo.LoginBo;
 import com.skyline.merchant.bo.MerchantUserBo;
-import com.skyline.merchant.common.CommonFields;
 import com.skyline.merchant.dal.dao.MerchantLoginDao;
+import com.skyline.merchant.dal.dao.MerchantUserDao;
 import com.skyline.merchant.dal.entity.MerchantLogin;
+import com.skyline.merchant.dal.entity.MerchantUser;
+import com.skyline.shield.common.exception.BusinessException;
 import com.skyline.shield.common.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+
+import static com.skyline.merchant.common.enums.MerchantReturnCode.ERROR_4002;
 
 @Service
 @Slf4j
@@ -24,46 +28,41 @@ public class MerchantLoginServiceImpl implements MerchantLoginService {
 
     @Autowired
     private MerchantLoginDao merchantLoginDao;
+    @Autowired
+    private MerchantUserDao merchantUserDao;
 
     @Override
-    public Boolean createAccount(CreateAccountBo bo) {
-        long id = IdUtil.createSnowflake(CommonFields.workerId, CommonFields.dataCenterId).nextId();
-        encryptPassword(bo);
-        MerchantLogin merchantLogin = BeanUtils.copyBean(bo, MerchantLogin.class);
-        merchantLogin.setId(id);
+    public MerchantUserBo login(LoginBo bo) {
+        List<MerchantLogin> merchantLogins = merchantLoginDao.searchByAccount(bo.getAccount());
+        // 无此用户
+        if (CollectionUtils.isEmpty(merchantLogins)) {
+            return null;
+        }
+        MerchantLogin login = merchantLogins.get(0);
+        if (!login.getPassword().equals(bo.getPassword())) {
+            throw new BusinessException(ERROR_4002);
+        }
+        MerchantUser user = merchantUserDao.getUserById(login.getUserId());
+        if (user == null) {
+            throw new BusinessException("用户信息不合法。");
+        }
+        MerchantUserBo userBo = BeanUtils.copyBean(login, MerchantUserBo.class);
+        userBo.setUsername(user.getName());
+        return userBo;
+    }
+
+    @Override
+    public Boolean create(String account, String password) {
+        long id = IdUtil.createSnowflake(1, 1).nextId();
+        String pwd = SecureUtil.md5(password);
+        MerchantLogin merchantLogin = new MerchantLogin();
         merchantLogin.setUserId(0L);
+        merchantLogin.setId(id);
+        merchantLogin.setAccount(account);
+        merchantLogin.setPassword(pwd);
+        merchantLogin.setSalt("");
         merchantLogin.setCreator(0L);
         merchantLogin.setModifier(0L);
-        Boolean result = merchantLoginDao.addMerchantLogin(merchantLogin);
-        return result;
+        return merchantLoginDao.addMerchantLogin(merchantLogin);
     }
-
-    private void encryptPassword(CreateAccountBo bo) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String password = encoder.encode(bo.getPassword());
-//        String salt = IdUtil.randomUUID().replaceAll(CommonFields.DASH, CommonFields.EMPTY_STRING);
-//        String password = DigestUtils.md5DigestAsHex(bo.getPassword().concat(salt).getBytes());
-//        log.debug("----Mark's record: salt = " + salt);
-        log.debug("----Mark's record: password = " + password);
-        bo.setSalt("");
-        bo.setPassword(password);
-    }
-
-    @Override
-    public void login(CreateAccountBo bo) {
-        String pwd = bo.getPassword() + "1d2c14897e6f4ff9ad686e675d8eea43";
-        String password = DigestUtils.md5DigestAsHex(pwd.getBytes());
-        log.debug("----Mark's record: isEqual = " + password.equals("e6a1155cac692d97000f61c2a4b17239"));
-    }
-
-    @Override
-    public MerchantUserBo searchUserByName(String account) {
-        List<MerchantLogin> accountList = merchantLoginDao.searchByAccount(account);
-        MerchantLogin merchantLogin = accountList.get(0);
-        MerchantUserBo merchantUserBo = BeanUtils.copyBean(merchantLogin, MerchantUserBo.class);
-        merchantUserBo.setUsername(merchantLogin.getAccount());
-        merchantUserBo.setDisplayName(merchantLogin.getAccount());
-        return merchantUserBo;
-    }
-
 }

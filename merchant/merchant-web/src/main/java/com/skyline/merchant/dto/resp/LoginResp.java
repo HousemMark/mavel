@@ -1,13 +1,11 @@
-package com.skyline.merchant.bo;
+package com.skyline.merchant.dto.resp;
 
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
-import java.util.Map;
 
 @Data
-public class MerchantUserBo {
+public class LoginResp {
     /**
      * 用户ID
      */
@@ -19,19 +17,14 @@ public class MerchantUserBo {
     private String username;
 
     /**
-     * 密码
+     * 商户ID
      */
-    private String password;
+    private Long merchantId;
 
     /**
      * 状态
      */
     private String status;
-
-    /**
-     * 商户ID
-     */
-    private Long merchantId;
 
     /**
      * 账号名称

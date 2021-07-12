@@ -1,5 +1,6 @@
 package com.skyline.gateway.core.impl;
 
+import cn.hutool.crypto.SecureUtil;
 import com.skyline.gateway.common.ApiReturnCode;
 import com.skyline.gateway.core.MerchantCoreService;
 import com.skyline.gateway.dto.req.LoginReq;
@@ -39,6 +40,7 @@ public class MerchantCoreServiceImpl implements MerchantCoreService {
     public LoginResponse login(LoginReq req, HttpServletRequest request) {
         LoginResp resp = null;
         try {
+            encrypt(req);
             resp = merchantUserFeignClient.login(req);
         } catch (Exception e) {
             log.error("请求merchant服务器失败...");
@@ -64,5 +66,11 @@ public class MerchantCoreServiceImpl implements MerchantCoreService {
         loginResponse.setStatus(resp.getStatus());
         loginResponse.setRole(resp.getRole());
         return loginResponse;
+    }
+
+    private void encrypt(LoginReq req) {
+        String password = SecureUtil.md5(req.getPassword());
+        log.debug("加密后的密码： {}", password);
+        req.setPassword(password);
     }
 }

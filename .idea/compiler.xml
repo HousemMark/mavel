@@ -41,6 +41,12 @@
       <module name="merchant-dal" options="-parameters" />
       <module name="merchant-web" options="-parameters" />
       <module name="professor" options="-parameters" />
+      <module name="shield-common" options="-parameters" />
+      <module name="shield-redis" options="-parameters" />
+      <module name="shield-snowflake" options="-parameters" />
+      <module name="shield-swagger" options="-parameters" />
+      <module name="shield-zk-client" options="-parameters" />
+      <module name="shield-zk-confcenter" options="-parameters" />
       <module name="spider" options="-parameters" />
     </option>
   </component>

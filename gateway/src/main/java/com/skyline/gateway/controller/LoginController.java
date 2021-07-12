@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Slf4j
-@RequestMapping("/login")
+@RequestMapping("/gateway")
 @RestController
 public class LoginController {
 
@@ -26,4 +26,13 @@ public class LoginController {
         return merchantCoreService.login(req, http);
     }
 
+    @PostMapping("/loginTest")
+    public LoginResponse loginTest(@Valid @RequestBody LoginReq req) {
+        return merchantCoreService.login(req, null);
+    }
+
+    @PostMapping("/test")
+    public Boolean test() {
+        return true;
+    }
 }

@@ -3,7 +3,8 @@ package com.skyline.merchant.common.enums;
 import com.skyline.shield.common.bean.IReturnCode;
 
 public enum MerchantReturnCode implements IReturnCode {
-    ERROR_4001(4001, "雪花id生成失败");
+    ERROR_4001(4001, "雪花id生成失败"),
+    ERROR_4002(4002, "密码错误");
 
     private int code;
 

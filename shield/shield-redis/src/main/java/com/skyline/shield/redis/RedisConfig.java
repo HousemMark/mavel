@@ -17,7 +17,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 public class RedisConfig {
 
     @Bean
-    @ConditionalOnProperty("spring.redis.database")
+//    @ConditionalOnProperty("spring.redis.database")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
 
         // 定义value的序列化方式
