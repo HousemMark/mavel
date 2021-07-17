@@ -44,7 +44,7 @@ public class MerchantCoreServiceImpl implements MerchantCoreService {
             resp = merchantUserFeignClient.login(req);
         } catch (Exception e) {
             log.error("请求merchant服务器失败...");
-            throw new ServiceException(ReturnCode.ERROR_01);
+            throw new ServiceException(ReturnCode.ERROR_01.getCode(), e.getMessage());
         }
         if (resp == null) {
             log.error(ApiReturnCode.NO_USER_ERROR.getMsg());

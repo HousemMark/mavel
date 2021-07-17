@@ -42,6 +42,7 @@
       <module name="merchant-web" options="-parameters" />
       <module name="professor" options="-parameters" />
       <module name="shield-common" options="-parameters" />
+      <module name="shield-mq" options="-parameters" />
       <module name="shield-redis" options="-parameters" />
       <module name="shield-snowflake" options="-parameters" />
       <module name="shield-swagger" options="-parameters" />
