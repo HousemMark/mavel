@@ -46,7 +46,7 @@ public class AuthFilter extends ApiFilter {
             appUserInfo = (AppUserInfo) redisService.get(token);
             redisService.expire(token, tokenValidTimeoutSeconds);
             String userIdCache = CacheCommonConstants.USER_ID_CACHE + appUserInfo.getOperatorId();
-            redisService.set(userIdCache, token, tokenValidTimeoutSeconds);
+            redisService.expire(userIdCache, tokenValidTimeoutSeconds);
         } catch (Exception e) {
             log.error(ApiReturnCode.EXPIRED_TOKEN_FAILED.getMsg());
             return authError(response, ApiReturnCode.AUTH_USER_FAILED);
