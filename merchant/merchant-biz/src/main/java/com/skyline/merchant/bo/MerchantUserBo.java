@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -41,7 +42,7 @@ public class MerchantUserBo {
     /**
      * 角色
      */
-    private String role;
+    private List<String> roles;
 
     /**
      * 权限资源

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyline.merchant.dal.mapper.ext.MerchantRoleExtMapper">
+  <select id="searchRolesByUserId" parameterType="java.lang.Long" resultType="java.lang.String">
+    select t1.name
+    from merchant_role as t1
+    join merchant_user_role_ralt as t2
+    on t1.id = t2.role_id
+    where t2.user_id = ${userId}
+  </select>
+</mapper>

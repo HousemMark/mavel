@@ -3,6 +3,7 @@ package com.skyline.merchant.dto.resp;
 import lombok.Data;
 
 import java.util.Collection;
+import java.util.List;
 
 @Data
 public class LoginResp {
@@ -34,7 +35,7 @@ public class LoginResp {
     /**
      * 角色
      */
-    private String role;
+    private List<String> roles;
 
     /**
      * 权限资源

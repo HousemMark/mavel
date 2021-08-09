@@ -8,14 +8,17 @@ import com.skyline.merchant.bo.CreateAccountBo;
 import com.skyline.merchant.bo.LoginBo;
 import com.skyline.merchant.bo.MerchantUserBo;
 import com.skyline.merchant.dal.dao.MerchantLoginDao;
+import com.skyline.merchant.dal.dao.MerchantRoleDao;
 import com.skyline.merchant.dal.dao.MerchantUserDao;
 import com.skyline.merchant.dal.entity.MerchantLogin;
+import com.skyline.merchant.dal.entity.MerchantRole;
 import com.skyline.merchant.dal.entity.MerchantUser;
 import com.skyline.shield.common.exception.BusinessException;
 import com.skyline.shield.common.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -30,6 +33,8 @@ public class MerchantLoginServiceImpl implements MerchantLoginService {
     private MerchantLoginDao merchantLoginDao;
     @Autowired
     private MerchantUserDao merchantUserDao;
+    @Autowired
+    private MerchantRoleDao merchantRoleDao;
 
     @Override
     public MerchantUserBo login(LoginBo bo) {
@@ -42,12 +47,13 @@ public class MerchantLoginServiceImpl implements MerchantLoginService {
         if (!login.getPassword().equals(bo.getPassword())) {
             throw new BusinessException(ERROR_4002);
         }
+        Assert.notNull(login.getUserId(), "用户信息不合法");
         MerchantUser user = merchantUserDao.getUserById(login.getUserId());
-        if (user == null) {
-            throw new BusinessException("用户信息不合法。");
-        }
+        Assert.notNull(user, "用户信息不合法");
+        List<String> roles = merchantRoleDao.searchRolesByUserId(login.getUserId());
         MerchantUserBo userBo = BeanUtils.copyBean(login, MerchantUserBo.class);
         userBo.setUsername(user.getName());
+        userBo.setRoles(roles);
         return userBo;
     }
 
